@@ -40,7 +40,7 @@ const Home: React.FC = () => {
             type="text"
             value={enterpriseId}
             onChange={handleChange}
-            placeholder="name.surname"
+            placeholder="id@accenture.com"
             autoCapitalize="none"
             required
           />

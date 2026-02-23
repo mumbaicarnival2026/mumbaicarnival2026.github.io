@@ -5,7 +5,7 @@ body {
 .download-container {
   min-height: 100vh;
   background: url("../../public/imgs/bg.png") no-repeat center/cover;
-  
+
 
 }
 
@@ -112,13 +112,7 @@ body {
 
 
 .question {
-  display: flex;
-  justify-content: space-between;
-  /* Push buttons to right */
-  align-items: center;
-  /* Vertical center */
   margin: 15px 0;
-  gap: 10px;
   font-size: 14px;
 }
 
@@ -145,32 +139,9 @@ textarea {
   gap: 8px;
 }
 
-.answer-buttons button {
-  padding: 5px 16px;
-  border-radius: 20px;
-  background: #e6d3b3;
-  border: none;
-  font-size: 13px;
-  cursor: pointer;
-}
-
-.answer-buttons button:last-child {
-  background: #2a3f6f;
-  color: white;
-}
 
 /* Normal buttons */
-.answer-buttons button {
-  padding: 6px 18px;
-  border-radius: 20px;
-  background: #2a3f6f;
-  border: none;
-  color: white;
-  font-size: 13px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  opacity: 0.7;
-}
+
 
 /* Hover */
 .answer-buttons button:hover {
@@ -337,8 +308,10 @@ textarea {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.4); /* dim background */
-  backdrop-filter: blur(8px); /* blur background */
+  background: rgba(0, 0, 0, 0.4);
+  /* dim background */
+  backdrop-filter: blur(8px);
+  /* blur background */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -352,3 +325,98 @@ textarea {
   object-fit: contain;
 }
 
+.answer-buttons button {
+  margin-top: 1%;
+  padding: 6px 18px;
+  border: 1px solid #fff;
+  width: 25%;
+  background: #f5f8ff00;
+  color: #fff;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  opacity: 0.7;
+}
+
+.answer-buttons button {
+  display: flex;
+  /* Makes icon + text inline */
+  align-items: center;
+  /* Vertical center */
+  justify-content: center;
+  gap: 8px;
+  /* Space between icon and text */
+
+  padding: 6px 18px;
+  border: 1px solid #fff;
+  width: 25%;
+  background: #f5f8ff00;
+  color: #fff;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  opacity: 0.7;
+  box-shadow: 0px 0px 8px rgb(245 193 108 / 54%);
+
+}
+
+/* Image styling */
+.answer-buttons button img {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  display: block;
+  /* prevents baseline alignment issues */
+}
+
+/* Success Overlay */
+.success-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(6px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  animation: fadeIn 0.3s ease forwards;
+}
+
+/* Modal Box */
+.success-modal {
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(15px);
+  padding: 35px 40px;
+  border-radius: 18px;
+  text-align: center;
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+  animation: popUp 0.35s ease forwards;
+}
+
+/* Checkmark */
+.checkmark {
+  font-size: 40px;
+  margin-bottom: 12px;
+  color: #4CAF50;
+  font-weight: bold;
+}
+
+/* Animations */
+@keyframes popUp {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}

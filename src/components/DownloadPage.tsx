@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 import { useNavigate } from "react-router-dom";
 import loadingAnimation from "../assets/loading.json";
-import Player from "lottie-react"; 
+import Player from "lottie-react";
 import "./Download.css";
 
 const DownloadPage: React.FC = () => {
@@ -11,6 +11,7 @@ const DownloadPage: React.FC = () => {
     (state: RootState) => state.enterprise.enterpriseId
   );
   const [loading, setLoading] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
 
   const navigate = useNavigate();
 
@@ -19,6 +20,7 @@ const DownloadPage: React.FC = () => {
     useful: "",
     clear: "",
     recommend: "",
+    aiclub:"",
     comments: "",
   });
 
@@ -35,11 +37,15 @@ const DownloadPage: React.FC = () => {
       id: "recommend",
       text: "Were you already aware of the information provided?",
     },
+    {
+      id: "aiclub",
+      text: "Do you want to join the AI club?",
+    }
   ];
 
 
   const SCRIPT_URL =
-    "https://script.google.com/macros/s/AKfycbw055V8x_QTw5UaTCYuPcwhcSl5bWKYoKo5n9MmTHeNzCWb_1ZPgDCBD7dFSPUAyxI/exec";
+    "https://script.google.com/macros/s/AKfycbxLUurqJ4440EbNR9iXs5HLZemlmmJaPbOiZOnoGlF8oVv0FoUd32E6aqps6XvLnAD2/exec";
 
 
   useEffect(() => {
@@ -57,6 +63,7 @@ const DownloadPage: React.FC = () => {
       useful: String(feedback.useful || ""),
       clear: String(feedback.clear || ""),
       recommend: String(feedback.recommend || ""),
+      aiclub:String(feedback.aiclub || ""),
       comments: String(feedback.comments || ""),
     };
 
@@ -73,8 +80,13 @@ const DownloadPage: React.FC = () => {
 
       console.log("Response:", data);
 
-      alert("Saved successfully!");
-      navigate("/");
+      setShowSuccess(true);
+
+      setTimeout(() => {
+        setShowSuccess(false);
+        navigate("/");
+      }, 2000);
+
       setLoading(false);
     } catch (err) {
       console.error("Error:", err);
@@ -109,6 +121,17 @@ const DownloadPage: React.FC = () => {
 
   return (
     <div className="download-container">
+      
+      {showSuccess && (
+        <div className="success-overlay">
+          <div className="success-modal">
+            <div className="checkmark">✓</div>
+            <h3>Feedback Submitted!</h3>
+            <p>Thank you for your valuable input.</p>
+          </div>
+        </div>
+      )}
+
       {/* Loading Overlay */}
       {loading && (
         <div className="loading-overlay">
@@ -157,6 +180,10 @@ const DownloadPage: React.FC = () => {
                     }
                     onClick={() => handleSelect(q.id, "Yes")}
                   >
+                    <img
+                      src="/imgs/thumb-up.png"
+                      alt="Thumbs Up"
+                    />
                     Yes
                   </button>
                   <button
@@ -165,6 +192,10 @@ const DownloadPage: React.FC = () => {
                     }
                     onClick={() => handleSelect(q.id, "No")}
                   >
+                    <img
+                      src="/imgs/thumb-down.png"
+                      alt="Thumbs down"
+                    />
                     No
                   </button>
                 </div>
@@ -172,7 +203,7 @@ const DownloadPage: React.FC = () => {
             ))}
 
             <textarea
-              placeholder="Enter comments..."
+              placeholder="Let us know how you felt about the event"
               onChange={(e) =>
                 setFeedback({ ...feedback, comments: e.target.value })
               }
